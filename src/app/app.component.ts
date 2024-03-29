@@ -61,7 +61,7 @@ export class AppComponent {
         message: message
       };
   
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_PUBLIC_KEY')
         .then((response: EmailJSResponseStatus) => {
           console.log('Email sent successfully', response);
           alert('Email sent successfully');
