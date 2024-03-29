@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Punojesi</th>
+      <th>Email</th>
+      <th>Numri Telefonit</th>
+      <th>Numri Personal</th>
+      <th>Pozicjoni Punes</th>
+      <th>Kontrata</th>
+      <th>Data Fillimit</th>
+      <th>Data Mbarimit</th>
+      <th>Veprimet</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let tables of table">
+    <tr>
+      <td>{{ tables.Punojesi }}</td>
+      <td>{{ tables.Email }}</td>
+      <td>{{ tables.NumriTelefonit }}</td>
+      <td>{{ tables.NumriPersonal }}</td>
+      <td>{{ tables.PozicjoniPunes }}</td>
+      <td>{{ tables.Kontrata }}</td>
+      <td>{{ tables.DataFillimit }}</td>
+      <td>{{ tables.DataMbarimit }}</td>
+      <td>
+        <button class="btn btn-success" [routerLink]="['/Admin/Table-Data', tables.id]">Edit</button>
+        <button class="btn btn-danger" (click)="deleteUser(tables.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
