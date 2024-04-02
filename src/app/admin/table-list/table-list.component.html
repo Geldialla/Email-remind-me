@@ -1,31 +1,45 @@
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Punojesi</th>
-      <th>Email</th>
-      <th>Numri Telefonit</th>
-      <th>Numri Personal</th>
-      <th>Pozicjoni Punes</th>
-      <th>Kontrata</th>
-      <th>Data Fillimit</th>
-      <th>Data Mbarimit</th>
-      <th>Veprimet</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let tables of table">
-    <tr>
-      <td>{{ tables.Punojesi }}</td>
-      <td>{{ tables.Email }}</td>
-      <td>{{ tables.NumriTelefonit }}</td>
-      <td>{{ tables.NumriPersonal }}</td>
-      <td>{{ tables.PozicjoniPunes }}</td>
-      <td>{{ tables.Kontrata }}</td>
-      <td>{{ tables.DataFillimit }}</td>
-      <td>{{ tables.DataMbarimit }}</td>
-      <td>
-        <button class="btn btn-success" [routerLink]="['/Admin/Table-Data', tables.id]">Edit</button>
-        <button class="btn btn-danger" (click)="deleteUser(tables.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container mt-5">
+  <div class="card">
+      <div class="card-header">
+          <h5 class="card-title">Contract Management</h5>
+      </div>
+      <div class="card-body">
+          <div class="mb-3">
+              <a class="btn btn-primary" routerLink="/Admin/Table-Data">Create New Contract</a>
+          </div>
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover mx-auto">
+                  <thead class="thead-light">
+                      <tr>
+                          <th scope="col">Punojesi</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Numri Telefonit</th>
+                          <th scope="col">Numri Personal</th>
+                          <th scope="col">Pozicjoni Punes</th>
+                          <th scope="col">Kontrata</th>
+                          <th scope="col">Data Fillimit</th>
+                          <th scope="col">Data Mbarimit</th>
+                          <th scope="col">Veprimet</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let tables of table">
+                      <tr>
+                          <td>{{ tables.Punojesi }}</td>
+                          <td>{{ tables.Email }}</td>
+                          <td>{{ tables.NumriTelefonit }}</td>
+                          <td>{{ tables.NumriPersonal }}</td>
+                          <td>{{ tables.PozicjoniPunes }}</td>
+                          <td>{{ tables.Kontrata }}</td>
+                          <td>{{ tables.DataFillimit }}</td>
+                          <td>{{ tables.DataMbarimit }}</td>
+                          <td>
+                              <button class="btn btn-sm btn-outline-primary" [routerLink]="['/Admin/Table-Data', tables.id]">Edit</button>
+                              <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteUser(tables.id)">Delete</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

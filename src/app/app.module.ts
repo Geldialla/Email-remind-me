@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { GeldiHttpClientModule } from './services/data-layer/geldi-be-mock.module';
 import { TableListComponent } from './admin/table-list/table-list.component';
 import { TableDataComponent } from './admin/table-data/table-data.component';
+import { CategoryDetailComponent } from './admin/category-detail/category-detail.component';
+import { CategoryListComponent } from './admin/category-list/category-list.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { TableDataComponent } from './admin/table-data/table-data.component';
     AdminpageComponent,
     TableListComponent,
     TableDataComponent,
+    CategoryDetailComponent,
+    CategoryListComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

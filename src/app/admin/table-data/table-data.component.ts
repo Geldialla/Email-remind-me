@@ -3,9 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'src/app/entity/table';
 import { GeldiHttpClient } from 'src/app/services/data-layer/geldi-be-mock.service';
 
-// Import the 'Table' interface
-// Update the path accordingly
-
 @Component({
   selector: 'app-table-data',
   templateUrl: './table-data.component.html',
@@ -26,7 +23,6 @@ export class TableDataComponent implements OnInit {
     DataFillimit: 0,
     DataMbarimit: 0,
   }
-
 
 
   constructor(

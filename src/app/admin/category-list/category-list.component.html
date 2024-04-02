@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Lloji punes</th>
+        <th>Veprimet</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let kategoryy of kategory">
+      <tr>
+        <td>{{ kategoryy.Name }}</td>
+        <td>
+          <button class="btn btn-success" [routerLink]="['/Admin/Category-Data', kategoryy.id]">Edit</button>
+          <button class="btn btn-danger" (click)="deleteUser(kategoryy.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
