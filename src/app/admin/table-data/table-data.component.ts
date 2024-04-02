@@ -24,7 +24,6 @@ export class TableDataComponent implements OnInit {
     DataMbarimit: 0,
   }
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -50,17 +49,16 @@ export class TableDataComponent implements OnInit {
     if (this.isEditMode) {
       this.dbService.put('Tablee', this.tableId, this.table as Table).subscribe((res) => {
         console.log(res);
-        alert('User updated');
+        alert('Table updated');
         this.router.navigate(['/Admin/Table-List']);
       });
     } else {
       this.dbService.post('Tablee', this.table as Table).subscribe((res) => {
         console.log(res);
-        alert('User created');
+        alert('Table created');
+        this.router.navigate(['/Admin/Table-List']);
       });
-
-      this.router.navigate(['/Admin/Table-List']);
     }
   }
-
+  
 }
