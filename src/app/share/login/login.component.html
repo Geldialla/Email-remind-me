@@ -37,7 +37,7 @@
                   </div>
                 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-success btn-lg btn-block" type="button" [disabled]="!isValidLogin" (click)="login()">Login</button>
+                    <button class="btn btn-success btn-lg btn-block" type="button" (click)="login()">Login</button>
                   </div>
                   <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
                 </form>

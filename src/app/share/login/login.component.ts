@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  isValidLogin: boolean = true;
   loggedInUser: User | null = null;
 
   constructor(
@@ -25,26 +24,34 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    if (this.email === 'AddYourUserName' && this.password === 'AddYouPassword') {
+  
+    if (this.email === 'AddYourUserName' && this.password === 'AddYourPassword') {
       console.log('Admin login successful');
       this.router.navigate(['/Admin/Table-List']);
     } else {
-      this.userService.getAll('User').subscribe((users) => {
-        const user = users.find((u) => u.email === this.email && u.password === this.password);
-
-        if (user) {
-          console.log('User login successful');
-          this.loggedInUser = user; 
-          localStorage.setItem('loggedInUser', JSON.stringify(user)); 
-          this.router.navigate(['/User/Product']);
-        } else {
-          console.log('Login failed');
-          this.errorMessage = 'Invalid email or password. Please try again.';
-          this.isValidLogin = false;
+      this.userService.getAll('User').subscribe(
+        (users) => {
+          const user = users.find((u) => u.email === this.email && u.password === this.password);
+  
+          if (user) {
+            console.log('User login successful');
+            this.loggedInUser = user;
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            this.router.navigate(['/User/Product']);
+          } else {
+            console.log('Login failed');
+            this.errorMessage = 'Invalid email or password. Please try again.';
+          }
+        },
+        (error) => {
+          console.error('Error occurred while logging in:', error);
+          this.errorMessage = 'An error occurred. Please try again later.';
         }
-      });
+      );
     }
   }
+  
+  
 
 
   
