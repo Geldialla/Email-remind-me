@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminpageComponent } from './admin/admin-page/adminpage.component';
 import { LoginComponent } from './share/login/login.component';
-import { TableListComponent } from './admin/table-list/table-list.component';
 import { TableDataComponent } from './admin/table-data/table-data.component';
 import { CategoryDetailComponent } from './admin/category-detail/category-detail.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
@@ -24,10 +23,6 @@ const routes: Routes = [
       {
         path: 'Dashboard',
         component: DashboardComponent,
-      },
-      {
-        path: 'Table-List',
-        component: TableListComponent
       },
       {
         path: 'Table-Data',

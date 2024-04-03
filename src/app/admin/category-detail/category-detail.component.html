@@ -1,11 +1,21 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="title">Category Type</label>
-          <input type="text" class="form-control" id="title" [(ngModel)]="category.Name" required>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Category Type
+            <a class="btn btn-secondary float-right" routerLink="/Admin/Dashboard">Go Back</a>
+          </h5>
+          
         </div>
-        <button class="btn btn-success" class="btn btn-primary" (click)="save()">Submit</button>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="title">Category Name</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="category.Name" required>
+          </div>
+          <button type="submit" class="btn btn-success btn-block" (click)="save()">Submit</button>
+        </div>
       </div>
     </div>
   </div>
+</div>

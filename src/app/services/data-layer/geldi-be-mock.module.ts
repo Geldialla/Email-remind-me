@@ -11,7 +11,7 @@ export interface LocalDbConfig {
 
 function dbConfigFunction() {
   const dbConfigLocal: DBConfig = {
-    name: 'SdaBeDB',
+    name: 'GeldiBeDB',
     version: 1,
     objectStoresMeta: [],
   };

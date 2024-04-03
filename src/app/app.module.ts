@@ -7,7 +7,6 @@ import { LoginComponent } from './share/login/login.component';
 import { AdminpageComponent } from './admin/admin-page/adminpage.component';
 import { FormsModule } from '@angular/forms';
 import { GeldiHttpClientModule } from './services/data-layer/geldi-be-mock.module';
-import { TableListComponent } from './admin/table-list/table-list.component';
 import { TableDataComponent } from './admin/table-data/table-data.component';
 import { CategoryDetailComponent } from './admin/category-detail/category-detail.component';
 import { CategoryListComponent } from './admin/category-list/category-list.component';
@@ -18,7 +17,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     AppComponent,
     LoginComponent,
     AdminpageComponent,
-    TableListComponent,
     TableDataComponent,
     CategoryDetailComponent,
     CategoryListComponent,

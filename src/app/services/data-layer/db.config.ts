@@ -9,4 +9,8 @@ export const dbConfig: LocalDbConfig[] = [
     table: "Tablee",
     columns: ['id', 'Punojesi', 'Emaili', 'NumriTelefonit', 'NumriPersonal', 'PozicjoniPunes', 'DataFillimit', 'DataMbarimit']
   },
+  {
+    table: "Kategoryy",
+    columns: ['id', 'Name']
+  },
 ];

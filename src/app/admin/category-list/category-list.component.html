@@ -1,18 +1,57 @@
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Lloji punes</th>
-        <th>Veprimet</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let kategoryy of kategory">
-      <tr>
-        <td>{{ kategoryy.Name }}</td>
-        <td>
-          <button class="btn btn-success" [routerLink]="['/Admin/Category-Data', kategoryy.id]">Edit</button>
-          <button class="btn btn-danger" (click)="deleteUser(kategoryy.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Contracts</h5>
+          <p class="card-text">{{ totalContracts }}</p>
+          <button class="btn btn-primary" (click)="exportToExcel()">Export</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Expired Contracts</h5>
+          <p class="card-text">{{ expiredContracts }}</p>
+          <button class="btn btn-primary" (click)="exportToExcel()">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Contract Management</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <a class="btn btn-primary mr-2" routerLink="/Admin/Table-Data">Create New Contract</a>
+        <a class="btn btn-primary" routerLink="/Admin/Category-Data">Create New Job Position</a>
+        <a class="btn btn-outline-secondary float-right" routerLink="/Admin/Dashboard">Go Back</a>
+      </div>
   
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mx-auto">
+          <thead class="thead-light">
+            <tr>
+              <th>Lloji punes</th>
+              <th>Veprimet</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let kategoryy of kategory">
+            <tr>
+              <td>{{ kategoryy.Name }}</td>
+              <td>
+                <button class="btn btn-outline-success btn-sm" [routerLink]="['/Admin/Category-Data', kategoryy.id]">Edit</button>
+                <button class="btn btn-outline-danger btn-sm ml-2" (click)="deleteUser(kategoryy.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

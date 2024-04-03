@@ -1,5 +1,6 @@
 export interface Table{
     id: number;
+    Name:string;
     Punojesi: string;
     Email: string;
     NumriTelefonit: number;

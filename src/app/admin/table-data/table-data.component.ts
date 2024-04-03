@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from 'src/app/entity/category';
 import { Table } from 'src/app/entity/table';
 import { GeldiHttpClient } from 'src/app/services/data-layer/geldi-be-mock.service';
 
@@ -9,6 +10,8 @@ import { GeldiHttpClient } from 'src/app/services/data-layer/geldi-be-mock.servi
   styleUrls: ['./table-data.component.css']
 })
 export class TableDataComponent implements OnInit {
+
+  category: Category[] = [];
 
   tableId: number = 0;
   isEditMode: boolean = false;
@@ -37,11 +40,18 @@ export class TableDataComponent implements OnInit {
     if (this.isEditMode) {
       this.getUserData(this.tableId);
     }
+    this.getCategoryData()
+
   }
   
   getUserData(id: number) {
     this.dbService.getById('Tablee', id).subscribe((product: Partial<Table>) => {
       this.table = product;
+    });
+  }
+  getCategoryData() {
+    this.dbService.getAll('Kategoryy').subscribe((res) => {
+      this.category = res;
     });
   }
   
@@ -50,13 +60,13 @@ export class TableDataComponent implements OnInit {
       this.dbService.put('Tablee', this.tableId, this.table as Table).subscribe((res) => {
         console.log(res);
         alert('Table updated');
-        this.router.navigate(['/Admin/Table-List']);
+        this.router.navigate(['/Admin/Dashboard']);
       });
     } else {
       this.dbService.post('Tablee', this.table as Table).subscribe((res) => {
         console.log(res);
         alert('Table created');
-        this.router.navigate(['/Admin/Table-List']);
+        this.router.navigate(['/Admin/Dashboard']);
       });
     }
   }
