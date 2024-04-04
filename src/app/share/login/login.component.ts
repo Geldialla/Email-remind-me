@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   
     if (this.email === 'AddYourUserName' && this.password === 'AddYourPassword') {
       console.log('Admin login successful');
-      this.router.navigate(['/Admin/Table-List']);
+      this.router.navigate(['/Admin/Dashboard']);
     } else {
       this.userService.getAll('User').subscribe(
         (users) => {
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             console.log('User login successful');
             this.loggedInUser = user;
             localStorage.setItem('loggedInUser', JSON.stringify(user));
-            this.router.navigate(['/User/Product']);
+            this.router.navigate(['/Admin/Dashboard']);
           } else {
             console.log('Login failed');
             this.errorMessage = 'Invalid email or password. Please try again.';

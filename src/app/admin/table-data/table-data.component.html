@@ -9,24 +9,24 @@
           <form (ngSubmit)="save()">
             <div class="form-group">
               <label for="title">Punojesi</label>
-              <input type="text" class="form-control" id="title" name="title" [(ngModel)]="table.Punojesi" required>
+              <input type="text" class="form-control" id="title" name="title" [(ngModel)]="table.Punojesi" pattern="^[A-Z][a-zA-Z]*$" required>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="table.Email" required>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="table.Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
             </div>
             <div class="form-group">
               <label for="phoneNumber">Numri Telefonit</label>
-              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="table.NumriTelefonit" required>
+              <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="table.NumriTelefonit" pattern="^\+?[0-9]{1,3}\s?\(?[0-9]{3}\)?[-.\s]?[0-9]{3}[-.\s]?[0-9]{4}$" required>
             </div>
             <div class="form-group">
               <label for="personalNumber">Numri Personal</label>
-              <input type="text" class="form-control" id="personalNumber" name="personalNumber" [(ngModel)]="table.NumriPersonal" required>
+              <input type="text" class="form-control" id="personalNumber" name="personalNumber" [(ngModel)]="table.NumriPersonal" pattern="^[A-Z]\d{8}[A-Z]$" required>
             </div>
             <div class="form-group">
               <label for="position">Pozicjoni i Punes</label>
-              <select class="form-control" id="category" [(ngModel)]="table.PozicjoniPunes" required>
-                <option *ngFor="let cat of category" [ngValue]="cat.id">{{ cat.Name }}</option>
+              <select class="form-control" id="category" name="position" [(ngModel)]="table.PozicjoniPunes" required>
+                <option *ngFor="let cat of category">{{ cat.Name }}</option>
               </select>
             </div>
             <div class="form-group">

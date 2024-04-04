@@ -9,6 +9,9 @@ import { GeldiHttpClient } from './services/data-layer/geldi-be-mock.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private dbService: GeldiHttpClient<Table>) {
     // Call sendEmail() initially
@@ -61,7 +64,7 @@ export class AppComponent {
         message: message
       };
   
-      emailjs.send('service_rlozsra', 'template_hu6il36', templateParams, 'smMdQNxwwWySahS7h')
+      emailjs.send('YOU_SERVICE_ID', 'YOU_TEMPLATE_ID', templateParams, 'USER_ID')
         .then((response: EmailJSResponseStatus) => {
           console.log('Email sent successfully', response);
           alert('Email sent successfully');

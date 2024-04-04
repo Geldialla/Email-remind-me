@@ -21,51 +21,69 @@
   </div>
 </div>
 
-
-<div class="container mt-5">
-<div class="card">
+<div class="container-fluid"> <!-- Use container-fluid to make it full-width -->
+  <div class="card m-5"> <!-- Added mt-5 for spacing -->
     <div class="card-header">
-        <h5 class="card-title">Contract Management</h5>
+      <h5 class="card-title">Contract Management</h5>
     </div>
     <div class="card-body">
-        <div class="mb-3">
-    <a class="btn btn-primary mr-2" routerLink="/Admin/Table-Data">Create New Contract</a>
-    <a class="btn btn-primary" routerLink="/Admin/Category-List">See Job Position</a>
+      <div class="mb-3">
+        <a class="btn btn-primary mr-2" routerLink="/Admin/Table-Data">Create New Contract</a>
+        <a class="btn btn-primary" routerLink="/Admin/Category-List">See Job Position</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mx-auto" style="width: 100%;">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Punojesi</th>
+              <th scope="col">Email</th>
+              <th scope="col">Numri Telefonit</th>
+              <th scope="col">Numri Personal</th>
+              <th scope="col">Pozicjoni Punes</th>
+              <th scope="col">Kontrata</th>
+              <th scope="col">Data Fillimit</th>
+              <th scope="col">Data Mbarimit</th>
+              <th scope="col">Veprimet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Only display users for the current page -->
+            <tr *ngFor="let table of getCurrentPageData(); let i = index">
+              <td>{{ getPageStartIndex() + i + 1 }}</td>
+              <td>{{ table.Punojesi }}</td>
+              <td>{{ table.Email }}</td>
+              <td>{{ table.NumriTelefonit }}</td>
+              <td>{{ table.NumriPersonal }}</td>
+              <td>{{ table.PozicjoniPunes }}</td>
+              <td>{{ table.Kontrata }}</td>
+              <td>{{ table.DataFillimit }}</td>
+              <td>{{ table.DataMbarimit }}</td>
+              <td>
+                <div class="d-flex align-items-center"> <!-- Flex container for alignment -->
+                  <button class="btn btn-sm-2 btn-outline-primary" [routerLink]="['/Admin/Table-Data', table.id]">Edit</button>
+                  <button class="btn btn-sm-2 btn-outline-danger ml-2" (click)="deleteUser(table.id)">Delete</button> <!-- Added ml-2 for spacing -->
+                </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          Showing {{ getPageStartIndex() + 1 }} to {{ getPageEndIndex() }} of {{ totalContracts }} users
+        </div>
+        <div class="d-flex"> <!-- Flex container for pagination buttons -->
+          <button class="btn btn-primary mr-2" [disabled]="currentPage === 1" (click)="previousPage()">Previous</button>
+          <div *ngFor="let page of getPageNumbers()">
+            <button class="btn btn-primary mr-2" [class.btn-outline-primary]="currentPage !== page" (click)="goToPage(page)">{{ page }}</button>
+          </div>
+          <button class="btn btn-primary" [disabled]="currentPage * pageSize >= totalContracts" (click)="nextPage()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover mx-auto">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Punojesi</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Numri Telefonit</th>
-                        <th scope="col">Numri Personal</th>
-                        <th scope="col">Pozicjoni Punes</th>
-                        <th scope="col">Kontrata</th>
-                        <th scope="col">Data Fillimit</th>
-                        <th scope="col">Data Mbarimit</th>
-                        <th scope="col">Veprimet</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let tables of table">
-                    <tr>
-                        <td>{{ tables.Punojesi }}</td>
-                        <td>{{ tables.Email }}</td>
-                        <td>{{ tables.NumriTelefonit }}</td>
-                        <td>{{ tables.NumriPersonal }}</td>
-                        <td>{{ tables.PozicjoniPunes }}</td>
-                        <td>{{ tables.Kontrata }}</td>
-                        <td>{{ tables.DataFillimit }}</td>
-                        <td>{{ tables.DataMbarimit }}</td>
-                        <td>
-                            <button class="btn btn-sm-2 btn-outline-primary" [routerLink]="['/Admin/Table-Data', tables.id]">Edit</button>
-                            <button class="btn btn-sm-2 mt-1 btn-outline-danger " (click)="deleteUser(tables.id)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>

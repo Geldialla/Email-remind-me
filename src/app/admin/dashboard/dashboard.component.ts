@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeldiHttpClient } from 'src/app/services/data-layer/geldi-be-mock.service';
 import { Table } from 'src/app/entity/table';
 import * as XLSX from 'xlsx';
-
+import { Category } from 'src/app/entity/category';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +12,10 @@ import * as XLSX from 'xlsx';
 export class DashboardComponent implements OnInit {
   table: Table[] = [];
   totalContracts: number = 0;
+  kategory: Category[] = [];
   expiredContracts: number = 0;
+  pageSize: number = 10; // Number of items per page
+  currentPage: number = 1; // Current page number
 
   constructor(private dbService: GeldiHttpClient<Table>) {}
 
@@ -20,14 +23,42 @@ export class DashboardComponent implements OnInit {
     this.getData();
     this.getTotalContracts();
     this.getExpiredContracts();
+    this.getCategoryData()
   }
 
-  getData() {
-    this.dbService.getAll('Tablee').subscribe((res) => {
-      this.table = res;
+  getCategoryData() {
+    this.dbService.getAll('Kategoryy').subscribe((res) => {
+      this.kategory = res;
     });
   }
- 
+
+  getCurrentPageData(): Table[] {
+    const startIndex = this.getPageStartIndex();
+    const endIndex = this.getPageEndIndex();
+    return this.table.slice(startIndex, endIndex);
+  }
+  
+  getData() {
+    // First, fetch categories
+    this.dbService.getAll('Kategoryy').subscribe((res: Category[]) => {
+      this.kategory = res;
+  
+      // Then, fetch tables
+      this.dbService.getAll('Tablee').subscribe((tableRes: Table[]) => {
+        // Associate categories with tables
+        this.table = tableRes.map(item => {
+          return {
+            ...item,
+            category: this.kategory.find(cat => cat.id === item.categoryId)
+          };
+        });
+      });
+    });
+  }
+  
+  
+  
+  
 
   deleteUser(id: number) {
     this.dbService.delete('Tablee', id).subscribe((res) => {
@@ -85,5 +116,40 @@ export class DashboardComponent implements OnInit {
     // For other cases, display an alert
     alert('There are multiple expired contracts. Please take necessary actions.');
   }
-}
 
+  // Pagination methods
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    const totalPages = Math.ceil(this.totalContracts / this.pageSize);
+    if (this.currentPage < totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  getPageStartIndex(): number {
+    return (this.currentPage - 1) * this.pageSize;
+  }
+
+  getPageEndIndex(): number {
+    const endIndex = this.currentPage * this.pageSize;
+    return Math.min(endIndex, this.totalContracts);
+  }
+
+  // Generate an array of page numbers
+  getPageNumbers(): number[] {
+    const totalPages = Math.ceil(this.totalContracts / this.pageSize);
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  // Navigate to a specific page
+  goToPage(page: number): void {
+    if (page >= 1 && page <= Math.ceil(this.totalContracts / this.pageSize)) {
+      this.currentPage = page;
+    }
+  }
+}

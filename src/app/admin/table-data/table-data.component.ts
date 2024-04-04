@@ -41,20 +41,20 @@ export class TableDataComponent implements OnInit {
       this.getUserData(this.tableId);
     }
     this.getCategoryData()
-
   }
-  
+
   getUserData(id: number) {
     this.dbService.getById('Tablee', id).subscribe((product: Partial<Table>) => {
       this.table = product;
     });
   }
+
   getCategoryData() {
     this.dbService.getAll('Kategoryy').subscribe((res) => {
       this.category = res;
     });
   }
-  
+
   save() {
     if (this.isEditMode) {
       this.dbService.put('Tablee', this.tableId, this.table as Table).subscribe((res) => {
@@ -63,12 +63,22 @@ export class TableDataComponent implements OnInit {
         this.router.navigate(['/Admin/Dashboard']);
       });
     } else {
-      this.dbService.post('Tablee', this.table as Table).subscribe((res) => {
-        console.log(res);
-        alert('Table created');
-        this.router.navigate(['/Admin/Dashboard']);
-      });
+      // Check if category is defined before accessing its id property
+      const categoryId = this.table.category?.id;
+      if (categoryId !== undefined) {
+        this.table.categoryId = categoryId;
+        this.dbService.post('Tablee', this.table as Table).subscribe((res) => {
+          console.log(res);
+          alert('Table created');
+          this.router.navigate(['/Admin/Dashboard']);
+        });
+      } else {
+        console.error("Category is undefined.");
+        // Handle this scenario appropriately, e.g., show an error message to the user
+      }
     }
   }
   
+  
+
 }

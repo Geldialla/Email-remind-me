@@ -1,6 +1,8 @@
-export interface Table{
+import { Category } from "./category";
+
+export interface Table {
     id: number;
-    Name:string;
+    Name: string;
     Punojesi: string;
     Email: string;
     NumriTelefonit: number;
@@ -9,4 +11,8 @@ export interface Table{
     DataFillimit: number;
     DataMbarimit: number;
     Kontrata: string;
-}
+    categoryId: number; // Assuming this property exists
+    category?: Category; // Make it optional
+  }
+  
+  
