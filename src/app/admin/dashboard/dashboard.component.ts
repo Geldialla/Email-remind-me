@@ -64,9 +64,13 @@ export class DashboardComponent implements OnInit {
     this.dbService.delete('Tablee', id).subscribe((res) => {
       console.log(res);
       alert('Table Deleted');
+      // After successful deletion, update the data and counts
       this.getData();
+      this.getTotalContracts(); // Update total contracts count
+      this.getExpiredContracts(); // Update expired contracts count
     });
   }
+  
 
   getTotalContracts(): void {
     this.dbService.getAll('Tablee').subscribe(tables => {
